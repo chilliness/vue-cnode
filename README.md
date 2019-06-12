@@ -1,69 +1,64 @@
 ## CNode移动版
 
-``` bash
-A Vue.js project
+> 亮点
 
-本实例是基于vue 2.0制作的CNode移动版，数据均来自CNode官方提供的API。
+``` bash
+1、涵盖vue及其全家桶常用知识点
+
+2、解决苹果手机橡皮筋效果和微信下拉露底效果
 ```
 
 > 效果
 
-![Image text](https://raw.githubusercontent.com/chilliness/vue-cnode/master/src/assets/demo.gif)
+![最终效果](/demo/demo.gif)
 
 > 注意事项
 
 ``` bash
-1、本实例是用vue-cli提供的webpack模板构建
+1、CSS代码使用了Scss编写
 
-2、CSS代码使用了Sass编写
+2、页面滚动使用better-scroll插件
 
-3、时间格式化使用moment插件
+3、本地存储使用good-storage插件
 
-4、页面滚动使用better-scroll插件
-
-5、图片懒加载使用vue-lazyload插件
+4、时间格式化使用moment插件
 ```
 
 > 功能实现
 
 ``` bash
-01、主题首页展示（包含上拉加载，下拉刷新）
+01、首页展示（包含上拉加载，下拉刷新，浏览状态保留）
 
-02、主题详情页展示
+02、详情页展示
 
 03、用户详情页展示
 
-04、用户登录功能
+04、登录、退出功能
 
-05、评论点赞功能（需登录）
-
-06、主题回复功能（需登录）
-
-07、新建主题功能（需登录）
-
-08、主题收藏功能（需登录）
-
-09、消息功能展示（需登录）
-
-10、已读标记功能（需登录）
+05、用户收藏页展示（需登录）
 ```
 
-> 最后一句
-
-本实例用到了vue + vue-router + axios等。
-
-## Build Setup
-
-``` bash
-# install dependencies
+## Project setup
+```
 npm install
+```
 
-# serve with hot reload at localhost:8080
-npm run dev
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-# build for production with minification
+### Compiles and minifies for production
+```
 npm run build
+```
 
-# build for production and view the bundle analyzer report
-npm run build --report
+### Run your tests
+```
+npm run test
+```
+
+### Lints and fixes files
+```
+npm run lint
 ```
