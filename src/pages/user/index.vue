@@ -5,7 +5,7 @@
       <div class="content">
         <div class="user-bar">
           <div class="avatar-box">
-            <img class="avatar" :src="user.avatar_url" alt="头像" v-if="user.avatar_url">
+            <img class="avatar" :src="user.avatar_url" alt="头像" v-if="user.avatar_url" />
           </div>
           <div class="text name">{{user.loginname}}</div>
           <div class="text score">{{'积分：' + user.score}}</div>
@@ -16,7 +16,7 @@
           <ul class="list-box" v-if="topics.length">
             <li class="item-box" v-for="(item, index) in topics" :key="index" @click="$router.push({name: 'topic', params: {id: item.id}})">
               <div class="avatar-box">
-                <img class="avatar" :src="item.author.avatar_url" alt="头像">
+                <img class="avatar" :src="item.author.avatar_url" alt="头像" />
               </div>
               <div class="desc-box">
                 <h3 class="title">{{item.title}}</h3>
@@ -31,7 +31,7 @@
           <ul class="list-box" v-if="replies.length">
             <li class="item-box" v-for="(item, index) in replies" :key="index" @click="$router.push({name: 'topic', params: {id: item.id}})">
               <div class="avatar-box">
-                <img class="avatar" :src="item.author.avatar_url" alt="头像">
+                <img class="avatar" :src="item.author.avatar_url" alt="头像" />
               </div>
               <div class="desc-box">
                 <h3 class="title">{{item.title}}</h3>

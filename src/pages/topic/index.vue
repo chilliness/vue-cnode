@@ -1,13 +1,13 @@
 <template>
   <div class="topic-wrap">
     <Header>{{title}}</Header>
-    <Scroll observeDOM :data="[article]" @scroll="handleUpdateTitle">
+    <Scroll observeDOM :data="[article]" @scrolled="handleUpdateTitle">
       <div class="content-box">
         <h2 class="title">{{article.title}}</h2>
         <div class="user-bar" v-if="article.author">
           <div class="user-box">
             <div class="avatar-box">
-              <img class="avatar" :src="article.author.avatar_url" alt="头像">
+              <img class="avatar" :src="article.author.avatar_url" alt="头像" />
             </div>
             <dl class="other">
               <dt class="name">{{article.author.loginname}}</dt>
@@ -18,8 +18,8 @@
             <i class="iconfont icon-view"></i>
             <span class="text">{{article.visit_count + '次'}}</span>
           </div>
-          <img class="tag" :src="top" alt="置顶" v-if="article.top">
-          <img class="tag" :src="good" alt="精华" v-else-if="article.good">
+          <img class="tag" :src="top" alt="置顶" v-if="article.top" />
+          <img class="tag" :src="good" alt="精华" v-else-if="article.good" />
         </div>
         <div v-html="article.content"></div>
       </div>
@@ -29,7 +29,7 @@
           <li class="item-box" v-for="(item, index) in article.replies" :key="index">
             <div class="user-box" @click="$router.push({name: 'user', params: {name: item.author.loginname}})">
               <div class="avatar-box">
-                <img class="avatar" :src="item.author.avatar_url" alt="头像">
+                <img class="avatar" :src="item.author.avatar_url" alt="头像" />
                 <span class="tag" v-if="item.author.loginname === article.author.loginname">楼主</span>
               </div>
               <div class="floor">{{(index + 1) + '楼'}}</div>

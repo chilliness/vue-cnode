@@ -7,20 +7,16 @@ import App from './App';
 import router from './router';
 import store from './store';
 import api from './utils/api';
-import GobleToast from './components/toast';
-import GobleConfirm from './components/confirm';
-import Scroll from './components/scroll';
-import Header from './components/header';
-import Loading from './components/loading';
+import { Scroll, Header, Loading, Toast, Confirm } from './components';
 import './common/scss/index.scss';
 
 Vue.config.productionTip = false;
 moment.locale('zh-cn');
-Vue.use(GobleToast);
-Vue.use(GobleConfirm);
 Vue.use(Scroll);
 Vue.use(Header);
 Vue.use(Loading);
+Vue.use(Toast);
+Vue.use(Confirm);
 
 // axios请求拦截器
 axios.interceptors.request.use(req => {

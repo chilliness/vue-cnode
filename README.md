@@ -1,5 +1,11 @@
 ## CNode移动版
 
+> 版本
+
+|链接|链接|
+|:------:|:------:|
+|[vue版](https://github.com/chilliness/vue-cnode)|[angular版](https://github.com/chilliness/ngx-cnode)|
+
 > 亮点
 
 ``` bash

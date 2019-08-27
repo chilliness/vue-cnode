@@ -5,11 +5,11 @@
       <li class="item-box" v-for="(item, index) in menus" :key="index" @click="handleChangeTab(item.alias, index)">{{item.text}}</li>
       <li class="line" :style="{left: form.active.index * 20 + '%'}"></li>
     </ul>
-    <Scroll :isHome="true" :pullDownRefresh="pullDownRefresh" :pullUpLoad="pullUpLoad" :data="form.list" @refresh="handleFetchData(true)" @load="handleFetchData" ref="scroll">
+    <Scroll :isHome="true" :pullDownRefresh="pullDownRefresh" :pullUpLoad="pullUpLoad" :data="form.list" @refreshed="handleFetchData(true)" @loaded="handleFetchData" ref="scroll">
       <ul class="list-box">
         <li class="item-box" v-for="(item, index) in form.list" :key="index" @click="$router.push({name: 'topic', params: {id: item.id}})">
           <div class="avatar-box">
-            <img class="avatar" :src="item.author.avatar_url" alt="头像">
+            <img class="avatar" :src="item.author.avatar_url" alt="头像" />
           </div>
           <div class="content">
             <div class="title">{{item.title}}</div>
@@ -27,7 +27,7 @@
       <div class="login-box">
         <div class="user-bar">
           <div class="avatar-box" @click="handleLogin">
-            <img class="avatar" :src="_user.avatar_url" alt="头像">
+            <img class="avatar" :src="_user.avatar_url" alt="头像" />
           </div>
           <div class="text">{{_user.loginname || '点击头像登录'}}</div>
         </div>
@@ -132,9 +132,7 @@ export default {
       try {
         this.isAjax = true;
         let res = await this.$http({
-          url: `${this.$api.topicList}?page=${this.form.page}&limit=${
-            this.form.size
-          }&tab=${this.form.active.tab}`
+          url: `${this.$api.topicList}?page=${this.form.page}&limit=${this.form.size}&tab=${this.form.active.tab}`
         });
         this.isAjax = false;
 

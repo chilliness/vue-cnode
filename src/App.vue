@@ -8,7 +8,18 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  watch: {
+    $route: {
+      handler() {
+        document
+          .querySelectorAll('.confirm-wrap')
+          .forEach(item => document.body.removeChild(item));
+      },
+      immediate: true,
+      deep: true
+    }
+  }
 };
 </script>
 

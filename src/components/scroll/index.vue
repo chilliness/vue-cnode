@@ -90,7 +90,7 @@ export default {
         });
 
         this.scroll.on('scroll', pos => {
-          this.$emit('scroll', pos);
+          this.$emit('scrolled', pos);
 
           if (this.pullDownRefresh) {
             let height = this.$refs.refresh.clientHeight;
@@ -109,14 +109,14 @@ export default {
         if (this.pullDownRefresh) {
           this.scroll.on('pullingDown', () => {
             this.refreshConfig.flag = true;
-            this.$emit('refresh');
+            this.$emit('refreshed');
           });
         }
 
         if (this.pullUpLoad) {
           this.scroll.on('pullingUp', () => {
             this.loadConfig.flag = true;
-            this.$emit('load');
+            this.$emit('loaded');
           });
         }
       } else {

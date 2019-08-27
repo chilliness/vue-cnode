@@ -5,7 +5,7 @@
       <div class="content">
         <div class="user-bar">
           <div class="avatar-box">
-            <img class="avatar" :src="_user.avatar_url" alt="头像">
+            <img class="avatar" :src="_user.avatar_url" alt="头像" />
           </div>
           <div class="text name">{{_user.loginname}}</div>
           <div class="text num">{{'收藏了' + list.length + '话题'}}</div>
@@ -15,7 +15,7 @@
           <ul class="list-box" v-if="list.length">
             <li class="item-box" v-for="(item, index) in list" :key="index" @click="$router.push({name: 'topic', params: {id: item.id}})">
               <div class="avatar-box">
-                <img class="avatar" :src="item.author.avatar_url" alt="头像">
+                <img class="avatar" :src="item.author.avatar_url" alt="头像" />
               </div>
               <div class="desc-box">
                 <h3 class="title">{{item.title}}</h3>
