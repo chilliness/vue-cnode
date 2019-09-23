@@ -1,5 +1,5 @@
 <template>
-  <div class="scroll-wrap" :class="{top: isHome}" ref="scrollBox">
+  <div class="scroll-wrap" :class="{top: isHome}" ref="scrollBoxRef">
     <div>
       <slot></slot>
       <div class="load-box" v-if="pullUpLoad">
@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <div class="refresh-box" v-if="pullDownRefresh" ref="refresh">
+    <div class="refresh-box" v-if="pullDownRefresh" ref="refreshRef">
       <div class="anim-box" v-if="refreshConfig.flag">
         <div class="item-box">
           <i class="item" v-for="item in 9" :key="item"></i>
@@ -81,7 +81,7 @@ export default {
   methods: {
     handleInitScroll() {
       if (!this.scroll) {
-        this.scroll = new this.$BScroll(this.$refs.scrollBox, {
+        this.scroll = new this.$BScroll(this.$refs.scrollBoxRef, {
           click: this.click,
           probeType: this.probeType,
           observeDOM: this.observeDOM,
@@ -90,16 +90,16 @@ export default {
         });
 
         this.scroll.on('scroll', pos => {
-          this.$emit('scrolled', pos);
+          this.$emit('emitScroll', pos);
 
           if (this.pullDownRefresh) {
-            let height = this.$refs.refresh.clientHeight;
+            let height = this.$refs.refreshRef.clientHeight;
 
             if (pos.y < 10) {
               this.refreshConfig.text = '下拉刷新';
             }
 
-            this.$refs.refresh.style.top = `${Math.min(
+            this.$refs.refreshRef.style.top = `${Math.min(
               pos.y - height,
               height
             )}px`;
@@ -109,14 +109,14 @@ export default {
         if (this.pullDownRefresh) {
           this.scroll.on('pullingDown', () => {
             this.refreshConfig.flag = true;
-            this.$emit('refreshed');
+            this.$emit('emitRefresh');
           });
         }
 
         if (this.pullUpLoad) {
           this.scroll.on('pullingUp', () => {
             this.loadConfig.flag = true;
-            this.$emit('loaded');
+            this.$emit('emitLoad');
           });
         }
       } else {
@@ -142,10 +142,14 @@ export default {
       }
     },
     handleScrollTo() {
-      this.scroll && this.scroll.scrollTo(0, 0, 100);
+      if (this.scroll) {
+        this.scroll.scrollTo(0, 0, 100);
+      }
     },
     handleRefresh() {
-      this.scroll && this.scroll.refresh();
+      if (this.scroll) {
+        this.scroll.refresh();
+      }
     }
   },
   watch: {

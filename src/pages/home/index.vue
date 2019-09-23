@@ -1,11 +1,11 @@
 <template>
   <div class="home-wrap">
-    <Header isHome @toggle="handleToggleLoginBar(true)">NodeJS论坛</Header>
+    <Header isHome @emitToggle="handleToggleLoginBar(true)">NodeJS论坛</Header>
     <ul class="nav-list">
       <li class="item-box" v-for="(item, index) in menus" :key="index" @click="handleChangeTab(item.alias, index)">{{item.text}}</li>
       <li class="line" :style="{left: form.active.index * 20 + '%'}"></li>
     </ul>
-    <Scroll :isHome="true" :pullDownRefresh="pullDownRefresh" :pullUpLoad="pullUpLoad" :data="form.list" @refreshed="handleFetchData(true)" @loaded="handleFetchData" ref="scroll">
+    <Scroll :isHome="true" :pullDownRefresh="pullDownRefresh" :pullUpLoad="pullUpLoad" :data="form.list" @emitRefresh="handleFetchData(true)" @emitLoad="handleFetchData" ref="scrollRef">
       <ul class="list-box">
         <li class="item-box" v-for="(item, index) in form.list" :key="index" @click="$router.push({name: 'topic', params: {id: item.id}})">
           <div class="avatar-box">
@@ -82,7 +82,9 @@ export default {
   computed: {
     _user() {
       let obj = this.$store.state.user;
-      !obj.avatar_url && (obj.avatar_url = this.avatar);
+      if (!obj.avatar_url) {
+        obj.avatar_url = this.avatar;
+      }
       return obj;
     }
   },
@@ -126,7 +128,7 @@ export default {
 
       if (isRefresh) {
         this.form.page = 1;
-        this.$refs.scroll.handleScrollTo();
+        this.$refs.scrollRef.handleScrollTo();
       }
 
       try {
@@ -139,21 +141,25 @@ export default {
         if (res.success) {
           if (isRefresh) {
             this.form.list = res.data;
-            this.$refs.scroll.handleFinshPullDown();
+            this.$refs.scrollRef.handleFinshPullDown();
           } else {
             this.form.list.push(...res.data);
-            this.$refs.scroll.handleFinshPullUp(!res.data.length);
+            this.$refs.scrollRef.handleFinshPullUp(!res.data.length);
           }
           this.isLoading = false;
           this.form.page++;
         } else {
           this.$toast({ msg: res.error_msg });
-          isRefresh && this.$refs.scroll.handleFinshPullDown(this.$api.msg);
+          if (isRefresh) {
+            this.$refs.scrollRef.handleFinshPullDown(this.$api.msg);
+          }
         }
       } catch (e) {
         this.isAjax = false;
         this.$toast({ msg: this.$api.msg });
-        isRefresh && this.$refs.scroll.handleFinshPullDown(this.$api.msg);
+        if (isRefresh) {
+          this.$refs.scrollRef.handleFinshPullDown(this.$api.msg);
+        }
       }
     },
     async handleLogin() {

@@ -12,7 +12,9 @@ export default new Vuex.Store({
   mutations: {
     $handleLogin(state, num) {
       state.isLogin = session.set('isLogin', num);
-      !num && session.clear();
+      if (!num) {
+        session.clear();
+      }
     },
     $handleUser(state, obj) {
       state.user = session.set('user', obj);

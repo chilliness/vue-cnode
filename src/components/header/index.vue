@@ -16,7 +16,7 @@ export default {
   methods: {
     handleClick() {
       if (this.isHome) {
-        return this.$emit('toggle');
+        return this.$emit('emitToggle');
       }
       this.$router.back();
     }

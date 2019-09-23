@@ -1,7 +1,7 @@
 <template>
   <div class="topic-wrap">
     <Header>{{title}}</Header>
-    <Scroll observeDOM :data="[article]" @scrolled="handleUpdateTitle">
+    <Scroll observeDOM :data="[article]" @emitScroll="handleUpdateTitle">
       <div class="content-box">
         <h2 class="title">{{article.title}}</h2>
         <div class="user-bar" v-if="article.author">
@@ -24,7 +24,7 @@
         <div v-html="article.content"></div>
       </div>
       <div class="reply-box" v-if="article.replies">
-        <h3 class="title" ref="message">{{'共有' + article.replies.length +'条留言'}}</h3>
+        <h3 class="title" ref="messageRef">{{'共有' + article.replies.length +'条留言'}}</h3>
         <ul class="list-box" v-if="article.replies.length">
           <li class="item-box" v-for="(item, index) in article.replies" :key="index">
             <div class="user-box" @click="$router.push({name: 'user', params: {name: item.author.loginname}})">
@@ -76,8 +76,8 @@ export default {
         .replace(/\s/g, '');
     },
     handleUpdateTitle() {
-      if (this.$refs.message) {
-        let obj = this.$refs.message.getBoundingClientRect();
+      if (this.$refs.messageRef) {
+        let obj = this.$refs.messageRef.getBoundingClientRect();
         this.title = obj.top > 50 ? '详情' : '留言';
       }
     },
